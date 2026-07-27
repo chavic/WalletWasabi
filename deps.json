@@ -500,6 +500,11 @@
     "hash": "sha256-kD2/DqDORKEM7cQGBbnPQ8kH7R3Kk0qFT5tpKVmdtK8="
   },
   {
+    "pname": "Payjoin",
+    "version": "0.2.0",
+    "hash": "sha256-u0RqDvZ/T76+TqsqB+WBXkZ1zcLUu5Db960PY67cxyQ="
+  },
+  {
     "pname": "QRackers",
     "version": "1.1.0",
     "hash": "sha256-ssYywDrJTMl2ZIBNyYO/TWBAxOtWJ7hI4UG7SXgsF/E="

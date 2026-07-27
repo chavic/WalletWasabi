@@ -94,6 +94,12 @@
           "System.Threading.Channels": "8.0.0"
         }
       },
+      "Payjoin": {
+        "type": "Direct",
+        "requested": "[0.2.0, )",
+        "resolved": "0.2.0",
+        "contentHash": "xf6Ztt7Bui0/mjX9VJyl0GJ72oJnJPcileN3b3QXerLak/sDpWzG/gxMNFC7whihmq8ogcmkdheagEEDIvAMCg=="
+      },
       "System.Linq.Async": {
         "type": "Direct",
         "requested": "[7.0.1, )",
