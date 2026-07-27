@@ -28,6 +28,7 @@ using WalletWasabi.Helpers;
 using WalletWasabi.Io;
 using WalletWasabi.Logging;
 using WalletWasabi.Models;
+using WalletWasabi.Payjoin;
 using WalletWasabi.Rpc;
 using WalletWasabi.Services;
 using WalletWasabi.Services.NodesManagement;
@@ -616,6 +617,8 @@ public class Global
 					}
 				}
 
+				RegisterPayjoinComponents();
+
 				await HostedServices.StartAllAsync(linkedCtsToken).ConfigureAwait(false);
 
 				await StartRpcServerAsync(terminateService, linkedCtsToken).ConfigureAwait(false);
@@ -706,6 +709,19 @@ public class Global
 			EventBus.Subscribe<Tick>(_ => torStatusChecker.Post(new TorStatusChecker.CheckMessage()))
 				.DisposeUsing(_disposables);
 		}
+	}
+
+	private void RegisterPayjoinComponents()
+	{
+		// The manager owns (and disposes) the session store; the send flow reaches the
+		// store through HostedServices.Get<PayjoinSenderManager>().SessionStore.
+		HostedServices.Register<PayjoinSenderManager>(
+			() => new PayjoinSenderManager(
+				PayjoinSenderSessionStore.FromFile(Path.Combine(DataDir, $"PayjoinSenderSessions-{Network}.sqlite")),
+				Network,
+				tx => TransactionBroadcaster.SendTransactionAsync(tx),
+				txid => TransactionStore.TryGetTransaction(txid, out _)),
+			"Payjoin Sender Manager");
 	}
 
 	private void RegisterCoinJoinComponents(Uri coordinatorUri)
