@@ -749,6 +749,7 @@
           "Microsoft.Win32.SystemEvents": "[10.0.12, )",
           "NBitcoin": "[10.0.13, )",
           "NNostr.Client": "[0.0.55, )",
+          "Payjoin": "[0.2.0, )",
           "System.Linq.Async": "[7.0.1, )",
           "WabiSabi": "[1.3.1, )"
         }
@@ -961,6 +962,12 @@
         "requested": "[0.0.1, )",
         "resolved": "0.0.1",
         "contentHash": "sFGydpttLN0bx8US2vRio7mFhqpqdQOAAQL9lABPi50epQ1bVcEdUgpFd3olvEMf6zyn1G3TErUsKyZGA19TeQ=="
+      },
+      "Payjoin": {
+        "type": "CentralTransitive",
+        "requested": "[0.2.0, )",
+        "resolved": "0.2.0",
+        "contentHash": "xf6Ztt7Bui0/mjX9VJyl0GJ72oJnJPcileN3b3QXerLak/sDpWzG/gxMNFC7whihmq8ogcmkdheagEEDIvAMCg=="
       },
       "QRackers": {
         "type": "CentralTransitive",
@@ -1279,6 +1286,12 @@
         "resolved": "10.0.12",
         "contentHash": "kdj5cqOwgZCMltEhQ4+WVUoFkMHG08EJfy1MDyS9H+FBg66vTTFyX8YcNl8IQh5wRQv79P+iduQgDGY8ucBR+w=="
       },
+      "Payjoin": {
+        "type": "CentralTransitive",
+        "requested": "[0.2.0, )",
+        "resolved": "0.2.0",
+        "contentHash": "xf6Ztt7Bui0/mjX9VJyl0GJ72oJnJPcileN3b3QXerLak/sDpWzG/gxMNFC7whihmq8ogcmkdheagEEDIvAMCg=="
+      },
       "SkiaSharp.NativeAssets.Linux": {
         "type": "CentralTransitive",
         "requested": "[3.119.4, )",
@@ -1545,6 +1558,12 @@
         "requested": "[10.0.12, )",
         "resolved": "10.0.12",
         "contentHash": "kdj5cqOwgZCMltEhQ4+WVUoFkMHG08EJfy1MDyS9H+FBg66vTTFyX8YcNl8IQh5wRQv79P+iduQgDGY8ucBR+w=="
+      },
+      "Payjoin": {
+        "type": "CentralTransitive",
+        "requested": "[0.2.0, )",
+        "resolved": "0.2.0",
+        "contentHash": "xf6Ztt7Bui0/mjX9VJyl0GJ72oJnJPcileN3b3QXerLak/sDpWzG/gxMNFC7whihmq8ogcmkdheagEEDIvAMCg=="
       },
       "SkiaSharp.NativeAssets.Linux": {
         "type": "CentralTransitive",
@@ -1813,6 +1832,12 @@
         "resolved": "10.0.12",
         "contentHash": "kdj5cqOwgZCMltEhQ4+WVUoFkMHG08EJfy1MDyS9H+FBg66vTTFyX8YcNl8IQh5wRQv79P+iduQgDGY8ucBR+w=="
       },
+      "Payjoin": {
+        "type": "CentralTransitive",
+        "requested": "[0.2.0, )",
+        "resolved": "0.2.0",
+        "contentHash": "xf6Ztt7Bui0/mjX9VJyl0GJ72oJnJPcileN3b3QXerLak/sDpWzG/gxMNFC7whihmq8ogcmkdheagEEDIvAMCg=="
+      },
       "SkiaSharp.NativeAssets.Linux": {
         "type": "CentralTransitive",
         "requested": "[3.119.4, )",
@@ -2080,6 +2105,12 @@
         "resolved": "10.0.12",
         "contentHash": "kdj5cqOwgZCMltEhQ4+WVUoFkMHG08EJfy1MDyS9H+FBg66vTTFyX8YcNl8IQh5wRQv79P+iduQgDGY8ucBR+w=="
       },
+      "Payjoin": {
+        "type": "CentralTransitive",
+        "requested": "[0.2.0, )",
+        "resolved": "0.2.0",
+        "contentHash": "xf6Ztt7Bui0/mjX9VJyl0GJ72oJnJPcileN3b3QXerLak/sDpWzG/gxMNFC7whihmq8ogcmkdheagEEDIvAMCg=="
+      },
       "SkiaSharp.NativeAssets.Linux": {
         "type": "CentralTransitive",
         "requested": "[3.119.4, )",
@@ -2325,6 +2356,12 @@
         "requested": "[10.0.12, )",
         "resolved": "10.0.12",
         "contentHash": "kdj5cqOwgZCMltEhQ4+WVUoFkMHG08EJfy1MDyS9H+FBg66vTTFyX8YcNl8IQh5wRQv79P+iduQgDGY8ucBR+w=="
+      },
+      "Payjoin": {
+        "type": "CentralTransitive",
+        "requested": "[0.2.0, )",
+        "resolved": "0.2.0",
+        "contentHash": "xf6Ztt7Bui0/mjX9VJyl0GJ72oJnJPcileN3b3QXerLak/sDpWzG/gxMNFC7whihmq8ogcmkdheagEEDIvAMCg=="
       },
       "SkiaSharp.NativeAssets.Linux": {
         "type": "CentralTransitive",
