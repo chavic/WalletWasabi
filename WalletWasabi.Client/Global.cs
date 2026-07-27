@@ -28,6 +28,7 @@ using WalletWasabi.Helpers;
 using WalletWasabi.Io;
 using WalletWasabi.Logging;
 using WalletWasabi.Models;
+using WalletWasabi.Payjoin;
 using WalletWasabi.Rpc;
 using WalletWasabi.Services;
 using WalletWasabi.Services.NodesManagement;
@@ -611,6 +612,8 @@ public class Global
 					}
 				}
 
+				RegisterPayjoinComponents();
+
 				await HostedServices.StartAllAsync(linkedCtsToken).ConfigureAwait(false);
 
 				await StartRpcServerAsync(terminateService, linkedCtsToken).ConfigureAwait(false);
@@ -700,6 +703,48 @@ public class Global
 			EventBus.Subscribe<Tick>(_ => torStatusChecker.Post(new TorStatusChecker.CheckMessage()))
 				.DisposeUsing(_disposables);
 		}
+	}
+
+	private void RegisterPayjoinComponents()
+	{
+		PayjoinSenderSessionStore sessionStore;
+		try
+		{
+			sessionStore = PayjoinSenderSessionStore.FromFile(Path.Combine(DataDir, $"PayjoinSenderSessions-{Network}.sqlite"));
+		}
+		catch (Exception ex)
+		{
+			// Payjoin is optional: without its store, payments go out as normal transactions.
+			Logger.LogError($"Payjoin is disabled, its session database could not be opened: {ex}");
+			return;
+		}
+
+		var payjoinHttpClientFactory = BuildHttpClientFactory(PayjoinConstants.OhttpHttpClientConfiguration);
+
+		// The manager owns (and disposes) the session store; the send flow reaches the
+		// store through HostedServices.Get<PayjoinSenderManager>().SessionStore.
+		HostedServices.Register<PayjoinSenderManager>(
+			() => new PayjoinSenderManager(
+				sessionStore,
+				Network,
+				tx => TransactionBroadcaster.SendTransactionAsync(tx),
+				txid => TransactionStore.TryGetTransaction(txid, out _),
+				GetSpenderTxId,
+				payjoinHttpClientFactory.CreateClient),
+			"Payjoin Sender Manager");
+	}
+
+	private uint256? GetSpenderTxId(OutPoint outPoint)
+	{
+		foreach (var wallet in WalletManager.GetWallets())
+		{
+			if (wallet.Coins.TryGetByOutPoint(outPoint, out var coin))
+			{
+				return coin.SpenderTransaction?.GetHash();
+			}
+		}
+
+		return null;
 	}
 
 	private void RegisterCoinJoinComponents(Uri coordinatorUri)
