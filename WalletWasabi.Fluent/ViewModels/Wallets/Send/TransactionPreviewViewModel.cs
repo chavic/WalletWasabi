@@ -21,6 +21,7 @@ using WalletWasabi.Fluent.ViewModels.Navigation;
 using WalletWasabi.Logging;
 using WalletWasabi.WabiSabi.Client.CoinJoin.Manager;
 using WalletWasabi.Wallets;
+using WalletWasabi.WebClients.PayJoin;
 
 namespace WalletWasabi.Fluent.ViewModels.Wallets.Send;
 
@@ -444,6 +445,14 @@ public partial class TransactionPreviewViewModel : RoutableViewModel
 				await SendTransactionAsync(finalTransaction);
 				_wallet.UpdateUsedHdPubKeysLabels(transaction.HdPubKeysWithNewLabels);
 				_cancellationTokenSource.Cancel();
+
+				// The user must see WHY a payjoin downgraded: one dialog, once, after the
+				// money is safely sent.
+				if (_info.PayJoinClient is Bip77PayjoinClient { DowngradeReason: { } downgradeReason })
+				{
+					await ShowErrorAsync("Payjoin", downgradeReason, "The payment was sent, but without payjoin.");
+				}
+
 				Navigate().To().SendSuccess(finalTransaction);
 			}
 		}
@@ -457,6 +466,9 @@ public partial class TransactionPreviewViewModel : RoutableViewModel
 		}
 		finally
 		{
+			// The send flow is done with the BIP 77 session, sent or not. Only a crash before
+			// this point leaves it to the sweeper's fallback broadcast.
+			(_info.PayJoinClient as Bip77PayjoinClient)?.ReleaseSession();
 			IsBusy = false;
 		}
 	}
